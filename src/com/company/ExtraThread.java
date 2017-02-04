@@ -1,23 +1,22 @@
 package com.company;
 
 /**
- * Created by lushi on 22.12.2016.
+ * Created by lushin on 03.02.2017.
  */
-public class NewThread implements Runnable {
+public class ExtraThread implements Runnable {
     private SynchronizedAccount account;
 
     @Override
     public void run() {
         for (int i = 0; i < 5; i++) {
             System.out.println(account.getBalance());
-            account.Decrease(20);
-           // account.Increase(10);
+            account.Increase(10);
             if (account.getBalance() < 0)
                 System.out.println("Перерасход!");
         }
     }
 
-    NewThread(SynchronizedAccount acc) {
+    ExtraThread(SynchronizedAccount acc) {
         account = acc;
     }
 }

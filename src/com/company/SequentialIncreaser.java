@@ -10,10 +10,12 @@ public class SequentialIncreaser implements Runnable {
 
     @Override
     public void run() {
-        Random random = new Random();
-        int money = (random.nextInt(8) + 1) * 100;
-        card.Increase(money);
-        System.out.println("Увеличено на " + money + " Баланс: " + card.GetBalance());
+        synchronized (card) {
+            Random random = new Random();
+            int money = (random.nextInt(8) + 1) * 100;
+            card.Increase(money);
+            System.out.println("Увеличено на " + money + " Баланс: " + card.GetBalance());
+        }
     }
 
     SequentialIncreaser(Card c) {

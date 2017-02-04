@@ -10,7 +10,11 @@ public class Account {
         return Balance;
     }
 
-    public void getMoney(int money) {
+    public synchronized void putMoney(int money) {
+        Balance += money;
+    }
+
+    public synchronized void getMoney(int money) {
         Balance = Balance - money;
     }
 }

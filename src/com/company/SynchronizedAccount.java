@@ -4,11 +4,23 @@ package com.company;
  * Created by lushi on 22.12.2016.
  */
 public class SynchronizedAccount {
-    private Account account = new Account();
+    private Account account;
+
+    public SynchronizedAccount(Account acc) {
+        account = acc;
+    }
 
     public void Decrease(int money) {
-        if (account.getBalance() >= money)
-            account.getMoney(money);
+        synchronized (account) {
+            if (account.getBalance() >= money)
+                account.getMoney(money);
+        }
+    }
+
+    public void Increase(int money) {
+        synchronized (account) {
+            account.putMoney(money);
+        }
     }
 
     public int getBalance() {
