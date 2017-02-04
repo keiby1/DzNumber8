@@ -16,19 +16,30 @@ public class Main {
         //decreaser.interrupt();
     }
 
-    public static void Task2(Card card) {
-            new Thread(new SequentialIncreaser(card)).start();
-            new Thread(new SequentialDecreaser(card)).start();
+    public static void Task2(Card card) throws InterruptedException {
+        System.out.println("Балланс: " + card.GetBalance());
+        for (int i = 0; i < 5; i++) {
+            Thread t1 = new Thread(new SequentialIncreaser(card));
+            Thread t2 = new Thread(new SequentialDecreaser(card));
+            t1.start();
+            t1.join();
+            t2.start();
+            t2.join();
+        }
     }
 
-    public static void Task3() {
+    public static void Task3() throws InterruptedException {
         Account account = new Account();
         SynchronizedAccount synchronizedAccount = new SynchronizedAccount(account);
-        new Thread(new NewThread(synchronizedAccount)).start();
-        new Thread(new ExtraThread(synchronizedAccount)).start();
+        Thread t1 = new Thread(new NewThread(synchronizedAccount));
+        Thread t2 = new Thread(new NewThread(synchronizedAccount));
+        t1.start();
+        t1.join();
+        t2.start();
+        t2.join();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         SomeTerminal terminal = new SomeTerminal();
         Scanner sc = new Scanner(System.in);
         Card testCard = new Card(500);

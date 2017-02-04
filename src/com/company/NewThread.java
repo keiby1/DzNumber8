@@ -11,7 +11,7 @@ public class NewThread implements Runnable {
         for (int i = 0; i < 5; i++) {
             System.out.println(account.getBalance());
             account.Decrease(20);
-           // account.Increase(10);
+            account.Increase(10);
             if (account.getBalance() < 0)
                 System.out.println("Перерасход!");
         }
